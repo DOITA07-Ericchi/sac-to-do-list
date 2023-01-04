@@ -34,7 +34,14 @@ namespace SAC_ToDoList
                     }
                     break;
                 case "2":
-                    // Aggiungi nuova attività
+                    Console.WriteLine("Inserisci il testo dell'attività: ");
+                    string taskText = Console.ReadLine();
+                    Console.WriteLine("L'attività è già in lavorazione? s/N");
+                    bool taskBool = Utilities.Convalida();
+                    Commission commission = new Commission(taskText, taskBool);
+
+                    commissions.Add(commission);
+
                     break;
                 case "3":
                     // Rimuovi attività

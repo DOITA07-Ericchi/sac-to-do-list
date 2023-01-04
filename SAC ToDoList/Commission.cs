@@ -10,9 +10,9 @@ namespace SAC_ToDoList
     {
         private string taskText { get; }
         private bool taskState { get; set; }
-        private DateTime? taskDate { get; set; }
+        private DateOnly? taskDate { get; set; }
 
-        public Commission(string taskText)
+        public Commission(string taskText, bool taskState = false, DateOnly? taskDate = null)
         {
             this.taskText = taskText;
         }
@@ -23,7 +23,7 @@ namespace SAC_ToDoList
             this.taskState = taskState;
         }
 
-        public void SetTaskDate(DateTime taskDate)
+        public void SetTaskDate(DateOnly taskDate)
         {
             this.taskDate = taskDate;
         }

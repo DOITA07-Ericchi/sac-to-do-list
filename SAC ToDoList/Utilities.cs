@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestoreEventi
+namespace SAC_ToDoList
 {
     public class Utilities
     {
@@ -39,7 +39,7 @@ namespace GestoreEventi
             bool valido = DateOnly.TryParse(value, japan, DateTimeStyles.None, out data);
             while (!valido)
             {
-                Console.Write("Data non valida. Riprova (yyyy年mm月dd日 oppure yyyy/mm/dd): ");
+                Console.Write("Data non valida. Riprova (yyyy/mm/dd): ");
                 value = Console.ReadLine();
                 valido = DateOnly.TryParse(value, japan, DateTimeStyles.None, out data);
             }
