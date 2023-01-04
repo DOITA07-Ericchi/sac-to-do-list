@@ -41,13 +41,43 @@ namespace SAC_ToDoList
                     Commission commission = new Commission(taskText, taskBool);
 
                     commissions.Add(commission);
+                    Console.WriteLine("Attività aggiunta con successo!");
 
                     break;
                 case "3":
-                    // Rimuovi attività
+                    for(int i=0; i<commissions.Count; i++)
+                    {
+                        Console.WriteLine("Indice " + i + "; Testo attività: " + commissions[i].GetTaskText());
+                    }
+                    Console.WriteLine("Inserisci l'indice dell'attività da rimuovere");
+                    uint indexToCheck = Utilities.ControllaUint(Console.ReadLine());
+                    if(indexToCheck > commissions.Count())
+                    {
+                        Console.WriteLine("Indice non trovato");
+                    } else
+                    {
+                        commissions.Remove(commissions[Int32.Parse(indexToCheck.ToString())]);
+                    }
+                    //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     break;
                 case "4":
-                    // Modifica testo attività
+                    for (int i = 0; i < commissions.Count; i++)
+                    {
+                        Console.WriteLine("Indice " + i + "; Testo attività: " + commissions[i].GetTaskText());
+                    }
+                    Console.WriteLine("Inserisci l'indice dell'attività da modificare");
+                    uint textIndexToCheck = Utilities.ControllaUint(Console.ReadLine());
+                    if (textIndexToCheck > commissions.Count())
+                    {
+                        Console.WriteLine("Indice non trovato");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Inserisci il testo sostitutivo: ");
+                        string newText = Console.ReadLine();
+
+                        commissions[Int32.Parse(textIndexToCheck.ToString())].SetTaskText(newText);
+                    }
                     break;
                 case "5":
                     // Modifica stato attività

@@ -17,7 +17,17 @@ namespace SAC_ToDoList
             this.taskText = taskText;
         }
         
+        public string GetTaskText()
+        {
+            return taskText;
+        }
+
         //Setters
+
+        public void SetTaskText(string taskText)
+        {
+            taskText = taskText.Trim();
+        }
         public void SetTaskState(bool taskState)
         {
             this.taskState = taskState;
