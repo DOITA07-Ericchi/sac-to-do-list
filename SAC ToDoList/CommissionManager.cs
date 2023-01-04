@@ -8,9 +8,16 @@ namespace SAC_ToDoList
 {
     public class CommissionManager
     {
-        List<Commission> commissions;
+        List<Commission> commissions = new();
 
-        public static void ShowMenu()
+        private bool closeProgram = false;
+
+        public bool GetCloseProgramBool()
+        {
+            return closeProgram;
+        }
+
+        public void ShowMenu()
         {
             Console.WriteLine("1 - Visualizza lista attività");
             Console.WriteLine("2 - Aggiungi nuova attività");
@@ -24,14 +31,24 @@ namespace SAC_ToDoList
 
         public void UserInput()
         {
-            Console.WriteLine("Scegli un'opzione:");
+            Console.Write("Scegli un'opzione: ");
             string input = Console.ReadLine();
             switch (input)
             {
                 case "1":
-                    foreach(Commission element in commissions) {
-                        element.PrintTaskDetails();
+                    if(commissions.Count == 0) { 
+                    Console.WriteLine("Nessuna attività trovata");
                     }
+                    else
+                    {
+                        foreach (Commission element in commissions)
+                        {
+                            Console.WriteLine("----------------------");
+                            element.PrintTaskDetails();
+                            Console.WriteLine("----------------------");
+                        }
+                    }
+
                     break;
                 case "2":
                     Console.WriteLine("Inserisci il testo dell'attività: ");
@@ -56,7 +73,7 @@ namespace SAC_ToDoList
                         Console.WriteLine("Indice non trovato");
                     } else
                     {
-                        commissions.Remove(commissions[Int32.Parse(indexToCheck.ToString())]);
+                        commissions.Remove(commissions[(Int32.Parse(indexToCheck.ToString())) + 1]);
                     }
                     //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     break;
@@ -76,7 +93,7 @@ namespace SAC_ToDoList
                         Console.WriteLine("Inserisci il testo sostitutivo: ");
                         string newText = Console.ReadLine();
 
-                        commissions[Int32.Parse(textIndexToCheck.ToString())].SetTaskText(newText);
+                        commissions[(Int32.Parse(textIndexToCheck.ToString())) + 1].SetTaskText(newText);
                     }
                     break;
                 case "5":
@@ -89,12 +106,15 @@ namespace SAC_ToDoList
                     // Visualizza solo attività da fare (opzionale)
                     break;
                 case "0":
-                    // Chiudi programma
+                    closeProgram = true;
                     break;
                 default:
-                    Console.WriteLine("Opzione non valida. Scegli un'opzione valida.");
+                    Console.WriteLine("Opzione non valida. Scegli un'opzione valida, premi Invio per continuare...");
                     break;
             }
+
+            //Console.Clear();
+            //ShowMenu();
         }
     }
 }
