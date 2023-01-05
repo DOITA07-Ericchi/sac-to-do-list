@@ -64,16 +64,16 @@ namespace SAC_ToDoList
                 case "3":
                     for(int i=0; i<commissions.Count; i++)
                     {
-                        Console.WriteLine("Indice " + i + "; Testo attività: " + commissions[i].GetTaskText());
+                        Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
                     }
                     Console.WriteLine("Inserisci l'indice dell'attività da rimuovere");
                     uint indexToCheck = Utilities.ControllaUint(Console.ReadLine());
-                    if(indexToCheck > commissions.Count())
+                    if(indexToCheck > commissions.Count() || indexToCheck == 0)
                     {
                         Console.WriteLine("Indice non trovato");
                     } else
                     {
-                        commissions.Remove(commissions[(Int32.Parse(indexToCheck.ToString())) + 1]);
+                        commissions.Remove(commissions[(Int32.Parse(indexToCheck.ToString())) - 1]);
                     }
                     //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     break;
@@ -84,7 +84,7 @@ namespace SAC_ToDoList
                     }
                     Console.WriteLine("Inserisci l'indice dell'attività da modificare");
                     uint textIndexToCheck = Utilities.ControllaUint(Console.ReadLine());
-                    if (textIndexToCheck > commissions.Count())
+                    if (textIndexToCheck > commissions.Count() || textIndexToCheck == 0)
                     {
                         Console.WriteLine("Indice non trovato");
                     }
