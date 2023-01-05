@@ -80,7 +80,7 @@ namespace SAC_ToDoList
                 case "4":
                     for (int i = 0; i < commissions.Count; i++)
                     {
-                        Console.WriteLine("Indice " + i + "; Testo attività: " + commissions[i].GetTaskText());
+                        Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
                     }
                     Console.WriteLine("Inserisci l'indice dell'attività da modificare");
                     uint textIndexToCheck = Utilities.ControllaUint(Console.ReadLine());
@@ -93,7 +93,7 @@ namespace SAC_ToDoList
                         Console.WriteLine("Inserisci il testo sostitutivo: ");
                         string newText = Console.ReadLine();
 
-                        commissions[(Int32.Parse(textIndexToCheck.ToString())) + 1].SetTaskText(newText);
+                        commissions[(Int32.Parse(textIndexToCheck.ToString())) - 1].SetTaskText(newText);
                     }
                     break;
                 case "5":

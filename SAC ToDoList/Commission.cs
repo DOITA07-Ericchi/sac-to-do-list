@@ -8,7 +8,7 @@ namespace SAC_ToDoList
 {
     public class Commission
     {
-        private string taskText { get; }
+        private string taskText { get; set; }
         private bool taskState { get; set; }
         private DateOnly? taskDate { get; set; }
 
@@ -26,7 +26,7 @@ namespace SAC_ToDoList
 
         public void SetTaskText(string taskText)
         {
-            taskText = taskText.Trim();
+            this.taskText = taskText.Trim();
         }
         public void SetTaskState(bool taskState)
         {
