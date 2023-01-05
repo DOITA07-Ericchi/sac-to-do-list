@@ -37,7 +37,7 @@ namespace SAC_ToDoList
             {
                 case "1":
                     if(commissions.Count == 0) { 
-                    Console.WriteLine("Nessuna attività trovata");
+                    Console.WriteLine("Nessuna attività trovata.");
                     }
                     else
                     {
@@ -51,9 +51,9 @@ namespace SAC_ToDoList
 
                     break;
                 case "2":
-                    Console.WriteLine("Inserisci il testo dell'attività: ");
+                    Console.Write("Inserisci il testo dell'attività: ");
                     string taskText = Console.ReadLine();
-                    Console.WriteLine("L'attività è già in lavorazione? s/N");
+                    Console.Write("L'attività è già in lavorazione? s/N: ");
                     bool taskBool = Utilities.Convalida();
                     Commission commission = new Commission(taskText, taskBool);
 
@@ -66,11 +66,11 @@ namespace SAC_ToDoList
                     {
                         Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
                     }
-                    Console.WriteLine("Inserisci l'indice dell'attività da rimuovere");
+                    Console.Write("Inserisci l'indice dell'attività da rimuovere: ");
                     uint indexToCheck = Utilities.ControllaUint(Console.ReadLine());
                     if(indexToCheck > commissions.Count() || indexToCheck == 0)
                     {
-                        Console.WriteLine("Indice non trovato");
+                        Console.WriteLine("Indice non trovato.");
                     } else
                     {
                         commissions.Remove(commissions[(Int32.Parse(indexToCheck.ToString())) - 1]);
@@ -82,15 +82,15 @@ namespace SAC_ToDoList
                     {
                         Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
                     }
-                    Console.WriteLine("Inserisci l'indice dell'attività da modificare");
+                    Console.Write("Inserisci l'indice dell'attività da modificare: ");
                     uint textIndexToCheck = Utilities.ControllaUint(Console.ReadLine());
                     if (textIndexToCheck > commissions.Count() || textIndexToCheck == 0)
                     {
-                        Console.WriteLine("Indice non trovato");
+                        Console.WriteLine("Indice non trovato.");
                     }
                     else
                     {
-                        Console.WriteLine("Inserisci il testo sostitutivo: ");
+                        Console.Write("Inserisci il testo sostitutivo: ");
                         string newText = Console.ReadLine();
 
                         commissions[(Int32.Parse(textIndexToCheck.ToString())) - 1].SetTaskText(newText);
@@ -109,7 +109,8 @@ namespace SAC_ToDoList
                     closeProgram = true;
                     break;
                 default:
-                    Console.WriteLine("Opzione non valida. Scegli un'opzione valida, premi Invio per continuare...");
+                    Console.Write("Opzione non valida. Premi Invio per continuare...");
+                    Console.ReadLine();
                     break;
             }
 
