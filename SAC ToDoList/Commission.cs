@@ -15,6 +15,7 @@ namespace SAC_ToDoList
         public Commission(string taskText, bool taskState = false, DateOnly? taskDate = null)
         {
             this.taskText = taskText;
+            SetTaskState(taskState);
         }
         
         public string GetTaskText()
