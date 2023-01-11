@@ -34,7 +34,7 @@
 						Console.WriteLine ("Nessuna attività trovata.");
 					} else {
 						Console.WriteLine ();
-						Console.WriteLine ("Elenco delle attività:");
+						Console.WriteLine ("Elenco delle attività:\n");
 						foreach (Commission element in taskList) {
 							Console.WriteLine (element.Description);
 							Console.WriteLine (element.Status);
@@ -43,8 +43,9 @@
 							} else {
 								Console.WriteLine ("Data non inserita!");
 							}
+							Console.WriteLine ("---------------------------");
 						}
-						Console.WriteLine ("---------------------------");
+						
 						Console.WriteLine ();
 					}
 				}
