@@ -95,7 +95,8 @@
 				using (CommissionContext db = new CommissionContext ()) {
 					List<Commission> taskList = db.Commissions.ToList<Commission> ();
 					for (int i = 0; i < taskList.Count; i++) {
-						//Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
+						Console.Write("Indice:" + taskList[i].Id);
+						Console.WriteLine("\tAttività: " + taskList[i].Description);
 					}
 					Console.Write ("Inserisci l'indice dell'attività da modificare: ");
 					uint textIndexToCheck = Utilities.ControllaUint (Console.ReadLine ());
@@ -105,8 +106,13 @@
 						Console.Write ("Inserisci il testo sostitutivo: ");
 						string newText = Console.ReadLine ();
 
-						//commissions[(Int32.Parse(textIndexToCheck.ToString())) - 1].SetTaskText(newText);
-					}
+                            Commission commissionDaModificare = db.Commissions
+							.Where(SingolaCommission => SingolaCommission.Id == textIndexToCheck)
+							.FirstOrDefault();
+
+							commissionDaModificare.Description = newText;
+							db.SaveChanges();
+                        }
 				}
 				break;
 			case "5":
