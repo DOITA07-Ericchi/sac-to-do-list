@@ -31,6 +31,7 @@
             switch (input)
             {
                 case "1":
+                    Console.WriteLine("Connessione al database in corso...");
                     using (CommissionContext db = new CommissionContext())
                     {
                         List<Commission> taskList = db.Commissions.ToList<Commission>();
@@ -67,6 +68,7 @@
                     Console.Write("Inserisci lo stato dell'attività: ");
                     string taskStatus = Console.ReadLine();
                     Commission commission = new Commission(taskText, taskStatus);
+                    Console.WriteLine("Connessione al database in corso...");
                     try
                     {
                         using (CommissionContext db = new CommissionContext())
