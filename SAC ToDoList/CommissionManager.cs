@@ -45,7 +45,7 @@
 							}
 							Console.WriteLine ("---------------------------");
 						}
-						
+
 						Console.WriteLine ();
 					}
 				}
@@ -72,23 +72,28 @@
 
 				break;
 			case "3":
-				using (CommissionContext db = new CommissionContext ()) {
-					List<Commission> taskList = db.Commissions.ToList<Commission> ();
-					for (int i = 0; i < taskList.Count; i++) {
-						//Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
+				Console.WriteLine ("Connessione al database in corso...");
+				try {
+					using (CommissionContext db = new CommissionContext ()) {
+						List<Commission> taskList = db.Commissions.ToList<Commission> ();
+						for (int i = 0; i < taskList.Count; i++) {
+							//Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
+						}
+						Console.Write ("Inserisci l'indice dell'attività da rimuovere: ");
+						uint indexToCheck = Utilities.ControllaUint (Console.ReadLine ());
+						if (indexToCheck > taskList.Count () || indexToCheck == 0) {
+							Console.WriteLine ("Indice non trovato.");
+						} else {
+							Commission commissionDaRimuovere = db.Commissions
+	.Where (SingolaCommission => SingolaCommission.Id == indexToCheck)
+	.FirstOrDefault ();
+							db.Commissions.Remove (commissionDaRimuovere);
+							db.SaveChanges ();
+						}
+						//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 					}
-					Console.Write ("Inserisci l'indice dell'attività da rimuovere: ");
-					uint indexToCheck = Utilities.ControllaUint (Console.ReadLine ());
-					if (indexToCheck > taskList.Count () || indexToCheck == 0) {
-						Console.WriteLine ("Indice non trovato.");
-					} else {
-						Commission commissionDaRimuovere = db.Commissions
-.Where (SingolaCommission => SingolaCommission.Id == indexToCheck)
-.FirstOrDefault ();
-						db.Commissions.Remove (commissionDaRimuovere);
-						db.SaveChanges ();
-					}
-					//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+				} catch (Exception e) {
+					Console.WriteLine ("Database error: " + e);
 				}
 				break;
 			case "4":
