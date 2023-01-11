@@ -97,28 +97,32 @@
 				}
 				break;
 			case "4":
-				using (CommissionContext db = new CommissionContext ())
-				{
-					List<Commission> taskList = db.Commissions.ToList<Commission> ();
-					for (int i = 0; i < taskList.Count; i++) {
-						Console.Write("Indice:" + taskList[i].Id);
-						Console.WriteLine("\tAttività: " + taskList[i].Description);
-					}
-					Console.Write ("Inserisci l'indice dell'attività da modificare: ");
-					uint textIndexToCheck = Utilities.ControllaUint (Console.ReadLine ());
-					if (textIndexToCheck > taskList.Count () || textIndexToCheck == 0) {
-						Console.WriteLine ("Indice non trovato.");
-					} else {
-						Console.Write ("Inserisci il testo sostitutivo: ");
-						string newText = Console.ReadLine ();
+				Console.WriteLine ("Connessione al database in corso...");
+				try {
+					using (CommissionContext db = new CommissionContext ()) {
+						List<Commission> taskList = db.Commissions.ToList<Commission> ();
+						for (int i = 0; i < taskList.Count; i++) {
+							Console.Write ("Indice:" + taskList [i].Id);
+							Console.WriteLine ("\tAttività: " + taskList [i].Description);
+						}
+						Console.Write ("Inserisci l'indice dell'attività da modificare: ");
+						uint textIndexToCheck = Utilities.ControllaUint (Console.ReadLine ());
+						if (textIndexToCheck > taskList.Count () || textIndexToCheck == 0) {
+							Console.WriteLine ("Indice non trovato.");
+						} else {
+							Console.Write ("Inserisci il testo sostitutivo: ");
+							string newText = Console.ReadLine ();
 
-                            Commission commissionDaModificare = db.Commissions
-							.Where(SingolaCommission => SingolaCommission.Id == textIndexToCheck)
-							.FirstOrDefault();
+							Commission commissionDaModificare = db.Commissions
+							.Where (SingolaCommission => SingolaCommission.Id == textIndexToCheck)
+							.FirstOrDefault ();
 
 							commissionDaModificare.Description = newText;
-							db.SaveChanges();
-                        }
+							db.SaveChanges ();
+						}
+					}
+				} catch (Exception e) {
+					Console.WriteLine ("Database error: " + e);
 				}
 				break;
 			case "5":
