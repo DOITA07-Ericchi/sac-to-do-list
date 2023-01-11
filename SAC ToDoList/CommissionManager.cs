@@ -122,8 +122,36 @@
 				}
 				break;
 			case "5":
-				// Modifica stato attività
-				break;
+                    using (CommissionContext db = new CommissionContext())
+                    {
+                        List<Commission> taskList = db.Commissions.ToList<Commission>();
+                        for (int i = 0; i < taskList.Count; i++)
+                        {
+                            Console.Write("Indice:" + taskList[i].Id);
+                            Console.WriteLine("\tAttività: " + taskList[i].Description);
+                            Console.WriteLine("\tStato: " + taskList[i].Status);
+                        }
+                        Console.Write("Inserisci l'indice dell'attività da modificare: ");
+                        uint indexToCheck = Utilities.ControllaUint(Console.ReadLine());
+                        if (indexToCheck > taskList.Count() || indexToCheck == 0)
+                        {
+                            Console.WriteLine("Indice non trovato.");
+                        }
+                        else
+                        {
+                            Console.Write("Inserisci lo stato sostitutivo: ");
+                            string newText = Console.ReadLine();
+
+                            Commission commissionDaModificare = db.Commissions
+                            .Where(SingolaCommission => SingolaCommission.Id == indexToCheck)
+                            .FirstOrDefault();
+
+                            commissionDaModificare.Status = newText;
+                            db.SaveChanges();
+							Console.WriteLine("Stato dell'attività aggiornato.");
+                        }
+                    }
+                    break;
 			case "6":
 				// Aggiungi/modifica data attività
 				break;
