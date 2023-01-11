@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SAC_ToDoList
+﻿namespace SAC_ToDoList
 {
     public class CommissionManager
     {
-        List<Commission> commissions = new();
+
 
         private bool closeProgram = false;
 
@@ -33,67 +27,98 @@ namespace SAC_ToDoList
         {
             Console.Write("Scegli un'opzione: ");
             string input = Console.ReadLine();
+
             switch (input)
             {
                 case "1":
-                    if(commissions.Count == 0) { 
-                    Console.WriteLine("Nessuna attività trovata.");
-                    }
-                    else
+                    using (CommissionContext db = new CommissionContext())
                     {
-                        foreach (Commission element in commissions)
+                        List<Commission> taskList = db.Commissions.ToList<Commission>();
+
+
+                        if (taskList.Count == 0)
                         {
-                            Console.WriteLine("----------------------");
-                            //element.PrintTaskDetails();
-                            Console.WriteLine("----------------------");
+                            Console.WriteLine("Nessuna attività trovata.");
+                        }
+                        else
+                        {
+                            foreach (Commission element in taskList)
+                            {
+                                Console.WriteLine(element.Description);
+
+
+
+
+                            }
                         }
                     }
-
                     break;
                 case "2":
                     Console.Write("Inserisci il testo dell'attività: ");
                     string taskText = Console.ReadLine();
-                    Console.Write("L'attività è già in lavorazione? s/N: ");
-                    bool taskBool = Utilities.Convalida();
-                    //Commission commission = new Commission(taskText, taskBool);
+                    Console.Write("Inserisci lo stato dell'attività");
+                    string taskStatus = Console.ReadLine();
+                    Commission commission = new Commission(taskText, taskStatus);
+                    try
+                    {
+                        using (CommissionContext db = new CommissionContext())
+                        {
 
-                    //commissions.Add(commission);
-                    Console.WriteLine("Attività aggiunta con successo!");
+                            db.Commissions.Add(commission);
+                            db.SaveChanges();
+
+                            Console.WriteLine("Attivita aggiunta con successo!");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Database error!: " e);
+                    };
+
 
                     break;
                 case "3":
-                    for(int i=0; i<commissions.Count; i++)
+                    using (CommissionContext db = new CommissionContext())
                     {
-                        //Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
+                        List<Commission> taskList = db.Commissions.ToList<Commission>();
+                        for (int i = 0; i < taskList.Count; i++)
+                        {
+                            //Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
+                        }
+                        Console.Write("Inserisci l'indice dell'attività da rimuovere: ");
+                        uint indexToCheck = Utilities.ControllaUint(Console.ReadLine());
+                        if (indexToCheck > taskList.Count() || indexToCheck == 0)
+                        {
+                            Console.WriteLine("Indice non trovato.");
+                        }
+                        else
+                        {
+                            taskList.Remove(taskList[(Int32.Parse(indexToCheck.ToString())) - 1]);
+                        }
+                        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     }
-                    Console.Write("Inserisci l'indice dell'attività da rimuovere: ");
-                    uint indexToCheck = Utilities.ControllaUint(Console.ReadLine());
-                    if(indexToCheck > commissions.Count() || indexToCheck == 0)
-                    {
-                        Console.WriteLine("Indice non trovato.");
-                    } else
-                    {
-                        commissions.Remove(commissions[(Int32.Parse(indexToCheck.ToString())) - 1]);
-                    }
-                    //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     break;
                 case "4":
-                    for (int i = 0; i < commissions.Count; i++)
+                    using (CommissionContext db = new CommissionContext())
                     {
-                        //Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
-                    }
-                    Console.Write("Inserisci l'indice dell'attività da modificare: ");
-                    uint textIndexToCheck = Utilities.ControllaUint(Console.ReadLine());
-                    if (textIndexToCheck > commissions.Count() || textIndexToCheck == 0)
-                    {
-                        Console.WriteLine("Indice non trovato.");
-                    }
-                    else
-                    {
-                        Console.Write("Inserisci il testo sostitutivo: ");
-                        string newText = Console.ReadLine();
+                        List<Commission> taskList = db.Commissions.ToList<Commission>();
+                        for (int i = 0; i < taskList.Count; i++)
+                        {
+                            //Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
+                        }
+                        Console.Write("Inserisci l'indice dell'attività da modificare: ");
+                        uint textIndexToCheck = Utilities.ControllaUint(Console.ReadLine());
+                        if (textIndexToCheck > taskList.Count() || textIndexToCheck == 0)
+                        {
+                            Console.WriteLine("Indice non trovato.");
+                        }
+                        else
+                        {
+                            Console.Write("Inserisci il testo sostitutivo: ");
+                            string newText = Console.ReadLine();
 
-                        //commissions[(Int32.Parse(textIndexToCheck.ToString())) - 1].SetTaskText(newText);
+                            //commissions[(Int32.Parse(textIndexToCheck.ToString())) - 1].SetTaskText(newText);
+                        }
                     }
                     break;
                 case "5":
@@ -113,6 +138,7 @@ namespace SAC_ToDoList
                     Console.ReadLine();
                     break;
             }
+
 
             //Console.Clear();
             //ShowMenu();
