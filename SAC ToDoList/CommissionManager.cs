@@ -92,7 +92,8 @@
 				}
 				break;
 			case "4":
-				using (CommissionContext db = new CommissionContext ()) {
+				using (CommissionContext db = new CommissionContext ())
+				{
 					List<Commission> taskList = db.Commissions.ToList<Commission> ();
 					for (int i = 0; i < taskList.Count; i++) {
 						Console.Write("Indice:" + taskList[i].Id);
