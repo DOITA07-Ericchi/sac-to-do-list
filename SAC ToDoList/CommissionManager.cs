@@ -44,7 +44,7 @@
                         else
                         {
                             Console.WriteLine();
-                            Console.WriteLine("---------------------------");
+                            Console.WriteLine("Elenco delle attività:");
                             foreach (Commission element in taskList)
                             {
                                 Console.WriteLine(element.Description);
@@ -55,7 +55,6 @@
                                 else {
                                     Console.WriteLine("Data non inserita!");
                                 }
-                                Console.WriteLine("---------------------------");
                             }
                             Console.WriteLine("---------------------------");
                             Console.WriteLine();
