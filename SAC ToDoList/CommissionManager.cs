@@ -42,21 +42,28 @@
                         }
                         else
                         {
+                            Console.WriteLine();
+                            Console.WriteLine("---------------------------");
                             foreach (Commission element in taskList)
                             {
                                 Console.WriteLine(element.Description);
-
-
-
-
+                                Console.WriteLine(element.Status);
+                                if (element.Date != null) {
+                                    Console.WriteLine(element.Date);
+                                }
+                                else {
+                                    Console.WriteLine("Data non inserita! ");
+                                }
                             }
+                            Console.WriteLine("---------------------------");
+                            Console.WriteLine();
                         }
                     }
                     break;
                 case "2":
                     Console.Write("Inserisci il testo dell'attività: ");
                     string taskText = Console.ReadLine();
-                    Console.Write("Inserisci lo stato dell'attività");
+                    Console.Write("Inserisci lo stato dell'attività: ");
                     string taskStatus = Console.ReadLine();
                     Commission commission = new Commission(taskText, taskStatus);
                     try
@@ -72,7 +79,7 @@
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("Database error!: " e);
+                        Console.WriteLine("Database error: " + e);
                     };
 
 
