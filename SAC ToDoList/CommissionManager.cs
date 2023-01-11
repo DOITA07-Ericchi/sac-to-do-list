@@ -52,8 +52,9 @@
                                     Console.WriteLine(element.Date);
                                 }
                                 else {
-                                    Console.WriteLine("Data non inserita! ");
+                                    Console.WriteLine("Data non inserita!");
                                 }
+                                Console.WriteLine("---------------------------");
                             }
                             Console.WriteLine("---------------------------");
                             Console.WriteLine();
