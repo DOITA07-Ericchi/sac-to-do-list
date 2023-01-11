@@ -44,7 +44,7 @@ namespace SAC_ToDoList
                         foreach (Commission element in commissions)
                         {
                             Console.WriteLine("----------------------");
-                            element.PrintTaskDetails();
+                            //element.PrintTaskDetails();
                             Console.WriteLine("----------------------");
                         }
                     }
@@ -55,16 +55,16 @@ namespace SAC_ToDoList
                     string taskText = Console.ReadLine();
                     Console.Write("L'attività è già in lavorazione? s/N: ");
                     bool taskBool = Utilities.Convalida();
-                    Commission commission = new Commission(taskText, taskBool);
+                    //Commission commission = new Commission(taskText, taskBool);
 
-                    commissions.Add(commission);
+                    //commissions.Add(commission);
                     Console.WriteLine("Attività aggiunta con successo!");
 
                     break;
                 case "3":
                     for(int i=0; i<commissions.Count; i++)
                     {
-                        Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
+                        //Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
                     }
                     Console.Write("Inserisci l'indice dell'attività da rimuovere: ");
                     uint indexToCheck = Utilities.ControllaUint(Console.ReadLine());
@@ -80,7 +80,7 @@ namespace SAC_ToDoList
                 case "4":
                     for (int i = 0; i < commissions.Count; i++)
                     {
-                        Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
+                        //Console.WriteLine("Indice " + (i+1) + "; Testo attività: " + commissions[i].GetTaskText());
                     }
                     Console.Write("Inserisci l'indice dell'attività da modificare: ");
                     uint textIndexToCheck = Utilities.ControllaUint(Console.ReadLine());
@@ -93,7 +93,7 @@ namespace SAC_ToDoList
                         Console.Write("Inserisci il testo sostitutivo: ");
                         string newText = Console.ReadLine();
 
-                        commissions[(Int32.Parse(textIndexToCheck.ToString())) - 1].SetTaskText(newText);
+                        //commissions[(Int32.Parse(textIndexToCheck.ToString())) - 1].SetTaskText(newText);
                     }
                     break;
                 case "5":

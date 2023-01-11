@@ -3,22 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SAC_ToDoList
 {
     public class Commission
     {
-        private string taskText { get; set; }
-        private bool taskState { get; set; }
-        private DateOnly? taskDate { get; set; }
+        public int Id { get; set; }
 
-        public Commission(string taskText, bool taskState = false, DateOnly? taskDate = null)
-        {
-            this.taskText = taskText;
-            SetTaskState(taskState);
-        }
+        [Required]
+        [Column(TypeName = "text")]
+        public string Description { get; set; }
+
+        [Required]
+        [Column(TypeName ="varchar(50)")]
+        public string Status { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime? Date { get; set; }
+
+        public Commission()
+        { 
         
-        public string GetTaskText()
+        }
+
+        public Commission(string description, string status, DateTime? date = null)
+        {
+            Description = description;
+            Status = status;
+            Date = date;
+        }
+
+
+
+
+
+
+
+
+
+
+        /*public string GetTaskText()
         {
             return taskText;
         }
@@ -63,7 +90,7 @@ namespace SAC_ToDoList
                 //ciaone a tutti ciao sto scrivando dal mio computer kekw
             }
 
-        }
+        }*/
 
 
 
