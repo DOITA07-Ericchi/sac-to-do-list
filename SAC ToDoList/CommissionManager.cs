@@ -89,6 +89,7 @@
 	.FirstOrDefault ();
 							db.Commissions.Remove (commissionDaRimuovere);
 							db.SaveChanges ();
+								Console.WriteLine ("Attività rimossa con successo!");
 						}
 						//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 					}
@@ -102,7 +103,7 @@
 					using (CommissionContext db = new CommissionContext ()) {
 						List<Commission> taskList = db.Commissions.ToList<Commission> ();
 						for (int i = 0; i < taskList.Count; i++) {
-							Console.Write ("Indice:" + taskList [i].Id);
+							Console.Write ("Indice: " + taskList [i].Id);
 							Console.WriteLine ("\tAttività: " + taskList [i].Description);
 						}
 						Console.Write ("Inserisci l'indice dell'attività da modificare: ");
@@ -119,6 +120,7 @@
 
 							commissionDaModificare.Description = newText;
 							db.SaveChanges ();
+								Console.WriteLine ("Testo sostituito con successo!");
 						}
 					}
 				} catch (Exception e) {
